@@ -40,7 +40,7 @@ const useSpeechRecognition = ({
   }
 
   const resetTranscript = useCallback(() => {
-    recognitionManager.resetTranscript()
+    // recognitionManager.resetTranscript()
     dispatchClearTranscript()
   }, [recognitionManager])
 
