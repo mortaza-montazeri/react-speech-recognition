@@ -21,6 +21,8 @@ export default class RecognitionManager {
     this.setSpeechRecognition = this.setSpeechRecognition.bind(this)
     this.disableRecognition = this.disableRecognition.bind(this)
 
+    this.clearTimeout = null
+
     this.setSpeechRecognition(SpeechRecognition)
 
     if (isAndroid()) {
@@ -143,6 +145,7 @@ export default class RecognitionManager {
   }
 
   updateTranscript({ results, resultIndex }) {
+    clearTimeout(this.clearTimeout);
     const currentIndex = resultIndex === undefined ? results.length - 1 : resultIndex
     this.interimTranscript = ''
     this.finalTranscript = ''
@@ -167,6 +170,9 @@ export default class RecognitionManager {
     }
     if (!isDuplicateResult) {
       this.emitTranscriptChange(this.interimTranscript, this.finalTranscript)
+      this.clearTimeout = setTimeout(() => {
+        this.emitClearTranscript()
+      }, 750)
     }
   }
 
