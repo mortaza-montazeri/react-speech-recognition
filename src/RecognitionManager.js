@@ -170,10 +170,10 @@ export default class RecognitionManager {
     }
     if (!isDuplicateResult) {
       this.emitTranscriptChange(this.interimTranscript, this.finalTranscript)
-      this.clearTimeout = setTimeout(() => {
-        this.emitClearTranscript()
-      }, 750)
     }
+    this.clearTimeout = setTimeout(() => {
+      this.emitClearTranscript()
+    }, 750)
   }
 
   updateFinalTranscript(newFinalTranscript) {
